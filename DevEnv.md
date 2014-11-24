@@ -35,12 +35,3 @@ $ wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accep
 ```
 $ sudo unzip -d /opt/ java_ee_sdk-7u1.zip
 ```
-# Install maven, git
-```
-$ sudo apt-get install maven git
-```
-
-# Oracle Java EE 7 Tutorial
-```
-$ wget http://docs.oracle.com/javaee/7/tutorial/doc/javaeetutorial7.pdf
-```
