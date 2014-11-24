@@ -27,12 +27,14 @@ java version "1.8.0_25"
 Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
 Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
 ```
-
 # Download Oracle Java EE 7 SDK
 ```
 $ wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/java_ee_sdk/7u3/java_ee_sdk-7u1.zip
 ```
-
+# Unzip java_ee_sdk-7u1.zip
+```
+$ sudo unzip -d /opt/ java_ee_sdk-7u1.zip
+```
 # Install maven, git
 ```
 $ sudo apt-get install maven git
