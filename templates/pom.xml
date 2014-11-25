@@ -5,7 +5,7 @@
   <artifactId>${artifactId}</artifactId>
   <packaging>war</packaging>
   <version>${project.version}</version>
-  <name>${groupId} Webapp</name>
+  <name>${project.groupId} Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -16,6 +16,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>${artifactId}-${project.version}</finalName>
+    <finalName>${project.artifactId}-${project.version}</finalName>
   </build>
 </project>
