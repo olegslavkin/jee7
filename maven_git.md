@@ -73,7 +73,8 @@ $ git commit -m "Add index.html"
 ```
 $ sudo mkdir /usr/local/apache-maven
 $ curl -O http://apache-mirror.rbc.ru/pub/apache/maven/maven-3/3.2.3/binaries/apache-maven-3.2.3-bin.zip
-$ sudo unzip -d /usr/local/apache-maven/ apache-maven-3.2.3-bin.zip
+$ sudo unzip -d /usr/local/ apache-maven-3.2.3-bin.zip
+$ sudo ln -s /usr/local/apache-maven-3.2.3 /usr/local/apache-maven
 ```
 ```
 $ vi ~/.bash_profile
