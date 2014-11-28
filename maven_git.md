@@ -1,43 +1,47 @@
+Краткий перечень инструкций по статье 
 ### Устанавливаем maven и git (Ubuntu 14.04.1)
 ```
 $ sudo apt-get install maven git
 ```
 
 ### Создание рабочей 
-#### For create and change dir open ~/.bash_profile and add line:
+#### Добавляем функцию позволяющие одной командой создать каталог и перейти в него
 ```
 $ vi ~/.bash_profile
 mkcd() { mkdir -p "$@" && cd $_; }
 ```
-#### Next create work dir
+#### Созданем папку с репозиторием
 ```
 $ mkcd hello_jsf.git
 ```
-### 
+### Создаем пустой репозиторий
 ```
 $ git init --bare
 Initialized empty Git repository in /home/java/hello_jsf.git/
 ```
 
-### on local laptop
+### Создание папки и репозитория, а также скачивание шаблонов
 ```
-$ mkcd hello_jsf.git
+$ mkcd hello_jsf
 $ git init
 $ curl -O https://raw.githubusercontent.com/olegslavkin/jee7/master/.gitignore
 $ curl -O https://raw.githubusercontent.com/olegslavkin/jee7/master/templates/pom.xml
 ```
+### Редактируем pom.xml
 ```
 $ edit pom.xml
     <groupId>info.slavkin.jee</groupId>
     <artifactId>hello_jsf</artifactId>
     <version>0.1</version>
 ```
+### Создаем необходимые каталоги и скачиваем шаблон 
 ```
 $ mkcd src/main/webapp/WEB-INF/
 $ curl -O https://raw.githubusercontent.com/olegslavkin/jee7/master/templates/web.xml
 $ cd ../../../../
 $ mkdir ./src/main/resources
 ```
+### Добавляем созданные файлы в репозиторий
 ```
 $ git add .
 $ git status
@@ -52,6 +56,7 @@ Changes to be committed:
 	new file:   pom.xml
 	new file:   src/main/webapp/WEB-INF/web.xml
 ```
+### Первый коммит
 ```
 $ git commit -m "initial commit"
 [master (root-commit) 87682df] initial commit
@@ -60,22 +65,26 @@ $ git commit -m "initial commit"
  create mode 100644 hellojsf/src/main/webapp/WEB-INF/web.xml
  create mode 100644 hellojsf/src/main/webapp/index.jsp
  create mode 100644 src/main/webapp/WEB-INF/web.xml
-``` 
+```
+Скачиваем простейший html в стиле "Hello World"
 ```
 $ cd src/main/webapp/
 $ curl -O https://raw.githubusercontent.com/olegslavkin/jee7/master/templates/index.html
 $ cd ../../../
+```
+### Добавляем скаченный файл в репозиторий и делаем коммит
+```
 $ git add src/main/webapp/index.html
-```
-```
 $ git commit -m "Add index.html"
 ```
+### Скачиваем и устанавливаем maven
 ```
 $ sudo mkdir /usr/local/apache-maven
 $ curl -O http://apache-mirror.rbc.ru/pub/apache/maven/maven-3/3.2.3/binaries/apache-maven-3.2.3-bin.zip
 $ sudo unzip -d /usr/local/ apache-maven-3.2.3-bin.zip
 $ sudo ln -s /usr/local/apache-maven-3.2.3 /usr/local/apache-maven
 ```
+### Добавляем необходимые переменные окружения
 ```
 $ vi ~/.bash_profile
 # Maven
@@ -90,6 +99,7 @@ launchctl setenv M2 $M2
 # PATH
 export PATH=$M2:$PATH
 ```
+### Проверяем версию maven
 ```
 $ mvn -version
 Apache Maven 3.2.3 (33f8c3e1027c3ddde99d3cdebad2656a31e8fdf4; 2014-08-12T00:58:10+04:00)
@@ -99,10 +109,11 @@ Java home: /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 Default locale: ru_RU, platform encoding: MacCyrillic
 OS name: "mac os x", version: "10.10.1", arch: "x86_64", family: "mac"
 ```
-
+### Создаем приложение
 ```
 $ mvn package
 ```
+### Листинг созданных каталогов и файлов в результате выполнения команды
 ```
 $ ls -1 target/
  classes
@@ -110,7 +121,6 @@ $ ls -1 target/
  hello_jsf-0.1.war <!-- Web Archive
  maven-archiver
 ```
-
 # Просмотр списка файлов архива
 ```
 $ jar tf target/hello_jsf-0.1.war
@@ -127,14 +137,13 @@ META-INF/maven/info.slavkin.jee/hello_jsf/
 META-INF/maven/info.slavkin.jee/hello_jsf/pom.xml
 META-INF/maven/info.slavkin.jee/hello_jsf/pom.properties
 ```
-
 ### Deploy application
- autodeploy
+* autodeploy
 ```
 $ sudo chown -R java:java /opt/glassfish4/glassfish/domains/domain1/autodeploy/ (remote)
 $ scp target/hello_jsf-0.1.war java@10.1.1.12:/opt/glassfish4/glassfish/domains/domain1/autodeploy/
 ``` 
- web deploy
+* web deploy
 ``` 
  $ scp target/hello_jsf-0.1.war  java@10.1.1.12:/home/java
 ```
@@ -151,10 +160,12 @@ $ curl http://10.1.1.12:8080/hello_jsf-0.1/
 </body>
 </html>
 ```
+### Добавляем удаленный репозиторий
 ```
-$ git remote add origin ssh://java@10.1.1.12:/home/java/hello_jsf.git
+$ git remote add origin ssh://java@х.х.х.х:/path/to/hello_jsf.git
 $ git remote -v
 ```
+### Push'им в удаленный репозиторий
 ```
 $ git push origin master
 Counting objects: 18, done.
